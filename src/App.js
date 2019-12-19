@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fire from "./config/firebase";
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
-import Table from './components/profile';
+import Profile from './components/profile';
 import Login from "./components/login";
 // import Signup from "./components/signup";
 
@@ -29,7 +29,7 @@ class App extends Component{
         const { uid } = this.state
         return (
             <div className="App">
-                {uid ? <Table/> : <Login/>}
+                {uid ? <Profile/> : <Login/>}
             </div>
         );
     }
