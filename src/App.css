@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
@@ -32,38 +32,24 @@
   }
 }
 
-table{
-  /*margin: 0px auto;*/
-  text-align: center;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  border: 3px solid #ddd;
-  width: 50%;
-  margin: 0px auto;
-}
-
-td, th{
-/*  border: 1px solid lightgray;*/
-/*  font-size: 16px;*/
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2;}
-tr:hover {background-color: #ddd;}
-
-th{
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #4CAF50;
-  color: white;
-}
-
-.container{
+.wrapper {
   display: flex;
   justify-content: center;
   /*flex-direction: column;*/
   align-items: center;
   height: 100vh;
+}
+
+.jumbotron {
+  background-color: #ffffff;
+}
+
+.bottom-form {
+
+}
+
+.logout {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }

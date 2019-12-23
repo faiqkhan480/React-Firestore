@@ -16,7 +16,14 @@ class App extends Component{
     componentDidMount() {
         fire.auth().onAuthStateChanged(user => {
             if(user) {
-                console.log(user, 'this user is signin')
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                console.log(displayName, uid, 'this user is signin')
                 this.setState({uid: user.uid})
             } else {
                 console.log("user is not signin")

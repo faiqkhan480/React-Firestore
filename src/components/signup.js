@@ -18,7 +18,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <Container className="themed-container container" fluid="sm">
+            <Container className="themed-container wrapper" fluid="sm">
                 <Form inline>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="User Name" className="mr-sm-2">Name</Label>

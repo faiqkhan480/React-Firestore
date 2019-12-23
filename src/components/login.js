@@ -31,7 +31,7 @@ class Login extends Component {
     render() {
         const { email, password } = this.state;
         return (
-            <Container className="container">
+            <Container className="wrapper">
                 <Form inline onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="Email" className="mr-sm-2">Email</Label>
