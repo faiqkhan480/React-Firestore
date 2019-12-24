@@ -17,13 +17,39 @@ class Signup extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
+    handleSubmit(event)  {
+        event.preventDefault();
+        const { name, email, password } = this.state;
+        console.log(this.state, 'state------')
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+                    res.user.updateProfile({
+                        displayName: name
+                    })
+                        .then(() => {
+                            this.setState({
+                                name: '',
+                                email: '',
+                                password: '',
+                            });
+                            this.props.history.push('/profile');
+                        })
+            })
+            .catch(err => {
+                console.log(err, 'err-=-=-=-')
+            })
+    }
+
+
+
     render() {
+        const { name, email, password } = this.state
         return (
-            <Container className="themed-container wrapper" fluid="sm">
-                <Form inline>
+            <Container className="wrapper">
+                <Form onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="User Name" className="mr-sm-2">Name</Label>
-                        <Input type="text" name="name" placeholder="something" />
+                        <Input type="text" name="name" value={name} placeholder="something" onChange={this.handleChange.bind(this)}/>
                     </FormGroup>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="Email" className="mr-sm-2">Email</Label>
@@ -33,7 +59,7 @@ class Signup extends Component {
                         <Label for="Password" className="mr-sm-2">Password</Label>
                         <Input type="password" name="password" value={password} placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
                     </FormGroup>
-                    <Button>Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </Form>
                 <NavLink to='/login'>Already have an account</NavLink>
             </Container>
