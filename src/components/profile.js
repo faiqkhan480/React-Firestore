@@ -26,11 +26,8 @@ class Profile extends React.Component{
 
     componentDidMount() {
         const user = fire.auth().currentUser;
-        this.setState({uid: user.uid})
-        db.collection('Data').doc('posts')
-            .onSnapshot((doc) => {
-                console.log(doc.data(), "get data=-=-=-=-");
-            })
+        // this.setState({uid: user.uid})
+        console.log(user, 'is sign in.....')
     }
 
     handleLogout() {

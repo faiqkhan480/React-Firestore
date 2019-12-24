@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from "firebase";
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {NavLink} from "react-router-dom";
+import fire from "../config/firebase";
 
 
 class Login extends Component {
@@ -12,6 +13,10 @@ class Login extends Component {
             password: '',
         }
     }
+    // componentDidMount() {
+    //     const user = fire.routes().currentUser
+    //     console.log(user.displayName, 'displayName=-=-=-=-')
+    // }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value})
