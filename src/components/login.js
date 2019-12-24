@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
-import { Container, Button, Form, FormGroup, Label, Input, NavLink } from 'reactstrap';
+import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {NavLink} from "react-router-dom";
 
 
 class Login extends Component {
@@ -43,7 +44,7 @@ class Login extends Component {
                     </FormGroup>
                     <Button type="submit">Submit</Button>
                 </Form>
-                <NavLink href="#">Don't have an account ?</NavLink>
+                <NavLink to='/sign-up'>Don't have an account ?</NavLink>
             </Container>
         );
     }

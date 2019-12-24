@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import fire from "./config/firebase";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
 import Profile from './components/profile';
 import Login from "./components/login";
-// import Signup from "./components/signup";
+import Signup from "./components/signup";
 
 class App extends Component{
     constructor(props) {
@@ -35,11 +36,19 @@ class App extends Component{
     render() {
         const { uid } = this.state
         return (
-            <div className="App">
-                {uid ? <Profile/> : <Login/>}
-            </div>
+         <Router>
+             <Switch>
+                 <Route exact path='/login' component={Login}/>
+                 <Route path='/sign-up' component={Signup}/>
+                 <Route path='/profile' component={Profile}/>
+             </Switch>
+         </Router>
         );
     }
 }
 
 export default App;
+
+// <div className="App">
+//     {uid ? <Profile/> : <Login/>}
+// </div>
