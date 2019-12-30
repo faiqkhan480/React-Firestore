@@ -45,11 +45,18 @@
 }
 
 .bottom-form {
-
+  position: absolute;
+  top: 90%;
+  bottom: 0;
+  width: 100%;
 }
 
 .logout {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+}
+
+.loading {
+  margin: 30% 10px 0 10px;
 }

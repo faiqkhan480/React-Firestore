@@ -6,13 +6,14 @@ import {
     Row,
     Col,
     Button,
+    Progress,
     Form,
     FormGroup,
     Input,
     Card,
     CardColumns,
     CardBody,
-    CardTitle, CardSubtitle, CardText, Jumbotron
+    CardTitle, CardSubtitle, CardText, Jumbotron, Spinner
 } from 'reactstrap'
 
 class Profile extends React.Component{
@@ -20,18 +21,39 @@ class Profile extends React.Component{
         super(props);
         this.state = {
             uid: '',
+            data: null,
             post: '',
         }
     }
 
     componentDidMount() {
-        const user = fire.auth().currentUser;
-        // this.setState({uid: user.uid})
-        console.log(user, 'is sign in.....')
+        const userUid = fire.auth().currentUser.uid;
+        const arr  = [];
+        this.setState({uid: userUid});
+        console.log(userUid, 'is sign in.....')
+        const userRef = db.collection("Data").doc(userUid);
+        userRef.collection("posts")
+            .onSnapshot((querySnap) => {
+                querySnap.forEach((doc) => {
+                    arr.push(doc.data())
+                })
+                this.setState({data: arr});
+            });
     }
 
     handleLogout() {
         fire.auth().signOut();
+    }
+
+    handleDelete() {
+        var user = firebase.auth().currentUser;
+
+        user.delete().then(function() {
+            console.log('User deleted');
+            this.props.history.push('/sign-up')
+        }).catch(function(error) {
+            console.log(error, 'An error happened.');
+        });
     }
 
     handleChange(e){
@@ -41,7 +63,7 @@ class Profile extends React.Component{
     handleSubmit(event){
         event.preventDefault();
         const { uid, post } = this.state;
-        const path = db.collection(uid).doc('Data')
+        const path = db.collection("Data").doc(uid)
         path.collection("posts").add({
             name: 'admin',
             post: post,
@@ -57,57 +79,44 @@ class Profile extends React.Component{
     }
 
     render() {
-        const { post } = this.state;
+        const { post, data } = this.state;
         return(
             <Jumbotron fluid className="jumbotron">
-
+                { !data ?
+                    <div className="loading">
+                        <Progress animated color="primary" value="100" />
+                    </div>
+                    // <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
+                    :
                 <Container fluid>
                     <Row>
+                        <Col className="logout">
+                            <Button color="danger" onClick={this.handleDelete.bind(this)}> Delete </Button>
+                        </Col>
                         <Col className="logout">
                             <Button color="danger" onClick={this.handleLogout.bind(this)}> logOut </Button>
                         </Col>
                     </Row>
                     <Row>
-                        <CardColumns>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>Card title</CardTitle>
-                                    <CardSubtitle>Card subtitle</CardSubtitle>
-                                    <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-                                    <Button>Delete</Button>
-                                </CardBody>
-                            </Card>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>Card title</CardTitle>
-                                    <CardSubtitle>Card subtitle</CardSubtitle>
-                                    <CardText>This card has supporting text below as a natural lead-in to additional content.</CardText>
-                                    <Button>Delete</Button>
-                                </CardBody>
-                            </Card>
-                            <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                                <CardTitle>Special Title Treatment</CardTitle>
-                                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                <Button>Delete</Button>
-                            </Card>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle>Card title</CardTitle>
-                                    <CardSubtitle>Card subtitle</CardSubtitle>
-                                    <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</CardText>
-                                    <Button>Delete</Button>
-                                </CardBody>
-                            </Card>
-                            <Card body inverse color="primary">
-                                <CardTitle>Special Title Treatment</CardTitle>
-                                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                <Button color="secondary">Delete</Button>
-                            </Card>
-                        </CardColumns>
+                      <CardColumns className="data">
+                          {
+                              data.map(( doc, i )=> {
+                                  return (
+                                      <Card key={i}>
+                                          <CardBody>
+                                              <CardTitle>{doc.name}</CardTitle>
+                                              <CardText>{doc.post}</CardText>
+                                              <Button>Delete</Button>
+                                          </CardBody>
+                                      </Card>
+                                  )
+                              })
+                          }
+                      </CardColumns>
                     </Row>
                     <Form className="bottom-form" onSubmit={this.handleSubmit.bind(this)}>
                         <Row form>
-                            <Col md={11}>
+                            <Col md={10}>
                                 <FormGroup>
                                     <Input type="text"placeholder="Posts" name="post" value={post} onChange={this.handleChange.bind(this)}/>
                                 </FormGroup>
@@ -117,7 +126,7 @@ class Profile extends React.Component{
                             </Col>
                         </Row>
                     </Form>
-                </Container>
+                </Container>}
             </Jumbotron>
         )
     }
