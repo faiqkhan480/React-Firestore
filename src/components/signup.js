@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, Label, Input, Container} from 'reactstrap';
 import { NavLink } from 'react-router-dom'
-import firebase from "firebase";
+// import firebase, {Firestore as db} from "firebase";
+import fire, { db } from "../config/firebase";
 
 class Signup extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class Signup extends Component {
         this.state = {
             name: '',
             email: '',
+            phone: '',
             password: '',
         }
     }
@@ -19,31 +21,47 @@ class Signup extends Component {
 
     handleSubmit(event)  {
         event.preventDefault();
-        const { name, email, password } = this.state;
+        const { name, email, phone, password } = this.state;
         console.log(this.state, 'state------')
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((res) => {
-                    res.user.updateProfile({
+        const promise = fire.auth().createUserWithEmailAndPassword(email, password);
+        promise.then( async (res) => {
+                    await res.user.updateProfile({
                         displayName: name
-                    })
-                        .then(() => {
-                            this.setState({
-                                name: '',
-                                email: '',
-                                password: '',
-                            });
-                            this.props.history.push('/profile');
-                        })
+                    });
             })
             .catch(err => {
                 console.log(err, 'err-=-=-=-')
-            })
+            });
+        promise.then(() => {
+            const userUid = fire.auth().currentUser.uid
+            const userRef = db.collection("Data").doc(userUid);
+            userRef.set({
+                name: name,
+                email: email,
+                phone: phone,
+            });
+            this.props.history.push('/profile');
+        })
+
+    }
+
+    addUserInfo(uid) {
+         console.log(uid, 'addUserInfo=-=-=-')
+    }
+
+    setValues() {
+        this.setState({
+            name: '',
+            email: '',
+            phone: '',
+            password: '',
+        })
     }
 
 
 
     render() {
-        const { name, email, password } = this.state
+        const { name, email, phone, password } = this.state
         return (
             <Container className="wrapper">
                 <Form onSubmit={this.handleSubmit.bind(this)}>
@@ -54,6 +72,10 @@ class Signup extends Component {
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="Email" className="mr-sm-2">Email</Label>
                         <Input type="email" name="email" value={email} placeholder="something@idk.cool" onChange={this.handleChange.bind(this)}/>
+                    </FormGroup>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="Email" className="mr-sm-2">Phone</Label>
+                        <Input type="phone" name="phone" value={phone} placeholder="+92-6546545" onChange={this.handleChange.bind(this)}/>
                     </FormGroup>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="Password" className="mr-sm-2">Password</Label>

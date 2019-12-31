@@ -86,7 +86,6 @@ class Profile extends React.Component{
                     <div className="loading">
                         <Progress animated color="primary" value="100" />
                     </div>
-                    // <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
                     :
                 <Container fluid>
                     <Row>
