@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import fire from "./config/firebase";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
-import Table from './components/profile';
+import AuthProvider from "./routes/auth";
+import ProtectedRoute from "./routes/protectedRoute";
+import UnProtectedRoute from "./routes/unprotectedRoute"
+import Profile from './components/profile';
 import Login from "./components/login";
-// import Signup from "./components/signup";
+import Signup from "./components/signup";
 
 class App extends Component{
     constructor(props) {
@@ -16,7 +20,7 @@ class App extends Component{
     componentDidMount() {
         fire.auth().onAuthStateChanged(user => {
             if(user) {
-                console.log(user, 'this user is signin')
+                console.log(user.uid, 'this user is signin')
                 this.setState({uid: user.uid})
             } else {
                 console.log("user is not signin")
@@ -28,11 +32,21 @@ class App extends Component{
     render() {
         const { uid } = this.state
         return (
-            <div className="App">
-                {uid ? <Table/> : <Login/>}
-            </div>
+            <AuthProvider>
+                <Router>
+                    <Switch>
+                        <UnProtectedRoute exact path='/login' component={Login}/>
+                        <Route path='/sign-up' component={Signup}/>
+                        <ProtectedRoute path='/profile' component={Profile}/>
+                    </Switch>
+                </Router>
+            </AuthProvider>
         );
     }
 }
 
 export default App;
+
+// <div className="App">
+//     {uid ? <Profile/> : <Login/>}
+// </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
-import { Container, Button, Form, FormGroup, Label, Input, NavLink } from 'reactstrap';
+import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {NavLink} from "react-router-dom";
+import fire from "../config/firebase";
 
 
 class Login extends Component {
@@ -11,6 +13,10 @@ class Login extends Component {
             password: '',
         }
     }
+    // componentDidMount() {
+    //     const user = fire.routes().currentUser
+    //     console.log(user.displayName, 'displayName=-=-=-=-')
+    // }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value})
@@ -31,7 +37,7 @@ class Login extends Component {
     render() {
         const { email, password } = this.state;
         return (
-            <Container className="container">
+            <Container className="wrapper">
                 <Form inline onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="Email" className="mr-sm-2">Email</Label>
@@ -43,7 +49,7 @@ class Login extends Component {
                     </FormGroup>
                     <Button type="submit">Submit</Button>
                 </Form>
-                <NavLink href="#">Don't have an account ?</NavLink>
+                <NavLink to='/sign-up'>Don't have an account ?</NavLink>
             </Container>
         );
     }
