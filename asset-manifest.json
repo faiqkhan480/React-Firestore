@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-firestore/static/css/main.1f50ebca.chunk.css",
-    "main.js": "/react-firestore/static/js/main.1ab59408.chunk.js",
-    "main.js.map": "/react-firestore/static/js/main.1ab59408.chunk.js.map",
+    "main.css": "/react-firestore/static/css/main.363f011e.chunk.css",
+    "main.js": "/react-firestore/static/js/main.c607819a.chunk.js",
+    "main.js.map": "/react-firestore/static/js/main.c607819a.chunk.js.map",
     "runtime~main.js": "/react-firestore/static/js/runtime~main.032ddae3.js",
     "runtime~main.js.map": "/react-firestore/static/js/runtime~main.032ddae3.js.map",
-    "static/js/2.f8060733.chunk.js": "/react-firestore/static/js/2.f8060733.chunk.js",
-    "static/js/2.f8060733.chunk.js.map": "/react-firestore/static/js/2.f8060733.chunk.js.map",
+    "static/js/2.ab546214.chunk.js": "/react-firestore/static/js/2.ab546214.chunk.js",
+    "static/js/2.ab546214.chunk.js.map": "/react-firestore/static/js/2.ab546214.chunk.js.map",
     "index.html": "/react-firestore/index.html",
-    "precache-manifest.4888927573b43961ee26f281c9c3b073.js": "/react-firestore/precache-manifest.4888927573b43961ee26f281c9c3b073.js",
+    "precache-manifest.0a9129c8122ab1c85aa64755038143bf.js": "/react-firestore/precache-manifest.0a9129c8122ab1c85aa64755038143bf.js",
     "service-worker.js": "/react-firestore/service-worker.js",
-    "static/css/main.1f50ebca.chunk.css.map": "/react-firestore/static/css/main.1f50ebca.chunk.css.map"
+    "static/css/main.363f011e.chunk.css.map": "/react-firestore/static/css/main.363f011e.chunk.css.map"
   }
 }
