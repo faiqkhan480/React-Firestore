@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Form, FormGroup, Label, Input, Container} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'reactstrap';
 import { NavLink } from 'react-router-dom'
 // import firebase, {Firestore as db} from "firebase";
 import fire, { db } from "../config/firebase";
@@ -63,28 +63,64 @@ class Signup extends Component {
     render() {
         const { name, email, phone, password } = this.state
         return (
-            <Container className="wrapper">
-                <Form onSubmit={this.handleSubmit.bind(this)}>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="User Name" className="mr-sm-2">Name</Label>
-                        <Input type="text" name="name" value={name} placeholder="something" onChange={this.handleChange.bind(this)}/>
+            <div className="wrapper">
+                <Form className="mb-4 container" onSubmit={this.handleSubmit.bind(this)}>
+                    <FormGroup className="container">
+                        <Row>
+                            <Col md="2" sm="2">
+                                <Label for="Name">Name</Label>
+                            </Col>
+                            <Col md="10" sm="10">
+                                <Input className="fields" type="text" name="name" value={name} placeholder="something" onChange={this.handleChange.bind(this)}/>
+                            </Col>
+                        </Row>
                     </FormGroup>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="Email" className="mr-sm-2">Email</Label>
-                        <Input type="email" name="email" value={email} placeholder="something@idk.cool" onChange={this.handleChange.bind(this)}/>
+                    <FormGroup className="container">
+                        <Row>
+                            <Col md="2" sm="2">
+                                <Label for="Email">Email</Label>
+                            </Col>
+                            <Col md="10" sm="10">
+                                <Input className="fields" type="email" name="email" value={email} placeholder="something@example.com" onChange={this.handleChange.bind(this)}/>
+                            </Col>
+                        </Row>
                     </FormGroup>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="Email" className="mr-sm-2">Phone</Label>
-                        <Input type="phone" name="phone" value={phone} placeholder="+92-6546545" onChange={this.handleChange.bind(this)}/>
+                    <FormGroup className="container">
+                        <Row>
+                            <Col md="2" sm="2">
+                                <Label for="Phone">Phone</Label>
+                            </Col>
+                            <Col md="10" sm="10">
+                                <Input className="fields" type="phone" name="phone" value={phone} placeholder="+92-6546545" onChange={this.handleChange.bind(this)}/>
+                            </Col>
+                        </Row>
                     </FormGroup>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="Password" className="mr-sm-2">Password</Label>
-                        <Input type="password" name="password" value={password} placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
+                    <FormGroup className="container">
+                        <Row>
+                            <Col md="2" sm="2">
+                                <Label for="Password">Password</Label>
+                            </Col>
+                            <Col md="10" sm="10">
+                                <Input className="fields" type="password" name="password" value={password} placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
+                            </Col>
+                        </Row>
                     </FormGroup>
-                    <Button type="submit">Submit</Button>
+                    <Container>
+                        <Row>
+                            <Col className="text-center">
+                                <Button className="submit" type="submit">Submit</Button>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Form>
-                <NavLink to='/login'>Already have an account</NavLink>
-            </Container>
+                <Container>
+                    <Row>
+                        <Col>
+                            <NavLink className="navlink" to='/'>Already have an account</NavLink>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }

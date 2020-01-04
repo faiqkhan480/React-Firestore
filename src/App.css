@@ -35,7 +35,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  /*flex-direction: column;*/
+  flex-direction: column;
   align-items: center;
   height: 100vh;
 }
@@ -59,4 +59,27 @@
 
 .loading {
   margin: 30% 10px 0 10px;
+}
+
+.fields {
+  border-radius: 25px;
+  text-align: center;
+  font-size: larger;
+  border-color: #679db7;
+}
+
+.submit {
+  border-radius: 25px;
+  /* font-size: larger; */
+  width: 200px;
+  float: right;
+  background: #67B26F;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #05f3ff, #679db7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #05f3ff, #679db7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+}
+
+.navlink {
+  float: right;
+  padding-right: 25px;
 }
