@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from "./config/firebase";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
 import AuthProvider from "./routes/auth";
@@ -33,13 +33,13 @@ class App extends Component{
         const { uid } = this.state
         return (
             <AuthProvider>
-                <Router>
+                <HashRouter basename='/'>
                     <Switch>
-                        <UnProtectedRoute exact path='/login' component={Login}/>
+                        <UnProtectedRoute exact path='/' component={Login}/>
                         <Route path='/sign-up' component={Signup}/>
                         <ProtectedRoute path='/profile' component={Profile}/>
                     </Switch>
-                </Router>
+                </HashRouter>
             </AuthProvider>
         );
     }
