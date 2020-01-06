@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/react-firestore/static/css/main.20e95eac.chunk.css",
+    "main.css": "/react-firestore/static/css/main.56c30a0e.chunk.css",
     "main.js": "/react-firestore/static/js/main.839e3587.chunk.js",
     "main.js.map": "/react-firestore/static/js/main.839e3587.chunk.js.map",
     "runtime~main.js": "/react-firestore/static/js/runtime~main.032ddae3.js",
@@ -8,8 +8,8 @@
     "static/js/2.a556df05.chunk.js": "/react-firestore/static/js/2.a556df05.chunk.js",
     "static/js/2.a556df05.chunk.js.map": "/react-firestore/static/js/2.a556df05.chunk.js.map",
     "index.html": "/react-firestore/index.html",
-    "precache-manifest.9ae5802c3ebd422f7587b1c36c82827f.js": "/react-firestore/precache-manifest.9ae5802c3ebd422f7587b1c36c82827f.js",
+    "precache-manifest.18028948a23975ee644b1b4e499caf93.js": "/react-firestore/precache-manifest.18028948a23975ee644b1b4e499caf93.js",
     "service-worker.js": "/react-firestore/service-worker.js",
-    "static/css/main.20e95eac.chunk.css.map": "/react-firestore/static/css/main.20e95eac.chunk.css.map"
+    "static/css/main.56c30a0e.chunk.css.map": "/react-firestore/static/css/main.56c30a0e.chunk.css.map"
   }
 }
