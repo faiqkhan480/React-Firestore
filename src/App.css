@@ -37,7 +37,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 95vh;
 }
 
 .jumbotron {
@@ -82,4 +82,18 @@
 .navlink {
   float: right;
   padding-right: 25px;
+}
+
+.footer {
+  float: right;
+}
+
+.repolink {
+  color: black;
+  font-size: 15px;
+}
+
+.repolink:hover {
+  text-decoration: none;
+  color: black;
 }

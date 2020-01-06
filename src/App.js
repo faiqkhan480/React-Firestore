@@ -9,6 +9,7 @@ import UnProtectedRoute from "./routes/unprotectedRoute"
 import Profile from './components/profile';
 import Login from "./components/login";
 import Signup from "./components/signup";
+import Footer from "./components/footer";
 
 class App extends Component{
     constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component{
                         <Route path='/sign-up' component={Signup}/>
                         <ProtectedRoute path='/profile' component={Profile}/>
                     </Switch>
+                    <Footer />
                 </HashRouter>
             </AuthProvider>
         );
@@ -46,7 +48,3 @@ class App extends Component{
 }
 
 export default App;
-
-// <div className="App">
-//     {uid ? <Profile/> : <Login/>}
-// </div>
