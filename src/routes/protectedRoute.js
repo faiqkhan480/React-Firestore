@@ -1,23 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "./auth";
-import fire from "../config/firebase";
 
 
-const ProtectedRoute = ({ component: RouteComponent, ...rest }) => {
+const ProtectedRoute = ({Component: RouteComponent, ...rest}) => {
     const {currentUser} = useContext(AuthContext);
-    return (
-        <Route
-            {...rest}
-            render={routeProps =>
-                !!currentUser ? (
-                    <RouteComponent {...routeProps} />
-                ) : (
-                    <Redirect to={"/"} />
-                )
-            }
-        />
-    );
-};
-;
+    return(
+        <Route {...rest} render={props =>
+            !!currentUser ? (
+                <RouteComponent {...props}/>
+            ) : (
+                <Redirect to={"/"} />
+            )
+        }/>
+    )
+}
+
 export default ProtectedRoute

@@ -81,52 +81,22 @@ class Profile extends React.Component{
     render() {
         const { post, data } = this.state;
         return(
-            <Jumbotron fluid className="jumbotron">
-                { !data ?
-                    <div className="loading">
-                        <Progress animated color="primary" value="100" />
-                    </div>
-                    :
-                <Container fluid>
-                    <Row>
-                        <Col className="logout">
-                            <Button color="danger" onClick={this.handleDelete.bind(this)}> Delete </Button>
-                        </Col>
-                        <Col className="logout">
-                            <Button color="danger" onClick={this.handleLogout.bind(this)}> logOut </Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                      <CardColumns className="data">
-                          {
-                              data.map(( doc, i )=> {
-                                  return (
-                                      <Card key={i}>
-                                          <CardBody>
-                                              <CardTitle>{doc.name}</CardTitle>
-                                              <CardText>{doc.post}</CardText>
-                                              <Button>Delete</Button>
-                                          </CardBody>
-                                      </Card>
-                                  )
-                              })
-                          }
-                      </CardColumns>
-                    </Row>
-                    <Form className="bottom-form" onSubmit={this.handleSubmit.bind(this)}>
-                        <Row form>
-                            <Col md={10}>
-                                <FormGroup>
-                                    <Input type="text"placeholder="Posts" name="post" value={post} onChange={this.handleChange.bind(this)}/>
-                                </FormGroup>
-                            </Col>
-                            <Col md={1}>
-                                <Button color="primary" type="submit">Submit</Button>
+            <div className="wrapper">
+                { data ?
+                    <Container>
+                        <Row>
+                            <Col><h1 className="display-3 name">Profile...</h1></Col>
+                            <Col lg="12">
+                                <Button color="danger" onClick={this.handleLogout.bind(this)}> logOut </Button>
                             </Col>
                         </Row>
-                    </Form>
-                </Container>}
-            </Jumbotron>
+                    </Container>
+                    :
+                    <div>
+                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
+                    </div>
+                }
+            </div>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Container, Row, Col, Spinner} from 'reactstrap';
 import { NavLink } from 'react-router-dom'
 // import firebase, {Firestore as db} from "firebase";
 import fire, { db } from "../config/firebase";
@@ -27,22 +27,21 @@ class Signup extends Component {
         promise.then( async (res) => {
                     await res.user.updateProfile({
                         displayName: name
-                    });
+                    })
+                        .then(() => {
+                            const userUid = fire.auth().currentUser.uid
+                            const userRef = db.collection("Users").doc(userUid);
+                            userRef.set({
+                                name: name,
+                                email: email,
+                                phone: phone,
+                            });
+                            this.props.history.push('/profile');
+                        })
             })
             .catch(err => {
                 console.log(err, 'err-=-=-=-')
             });
-        promise.then(() => {
-            const userUid = fire.auth().currentUser.uid
-            const userRef = db.collection("Data").doc(userUid);
-            userRef.set({
-                name: name,
-                email: email,
-                phone: phone,
-            });
-            this.props.history.push('/profile');
-        })
-
     }
 
     addUserInfo(uid) {
@@ -61,7 +60,7 @@ class Signup extends Component {
 
 
     render() {
-        const { name, email, phone, password } = this.state
+        const { name, email, phone, password, loading } = this.state
         return (
             <div className="wrapper">
                 <Form className="mb-4 container" onSubmit={this.handleSubmit.bind(this)}>

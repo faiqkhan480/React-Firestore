@@ -37,7 +37,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 95vh;
+  height: 94vh;
 }
 
 .jumbotron {
@@ -55,10 +55,6 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
-}
-
-.loading {
-  margin: 30% 10px 0 10px;
 }
 
 .fields {
@@ -80,8 +76,12 @@
 }
 
 .navlink {
+  color: #61dafb;
   float: right;
   padding-right: 25px;
+}
+.navlink:hover {
+  color: #61dafb;
 }
 
 .footer {
@@ -96,4 +96,8 @@
 .repolink:hover {
   text-decoration: none;
   color: black;
+}
+
+.name {
+  font-family: "Yu Gothic UI";
 }

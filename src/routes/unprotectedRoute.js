@@ -7,9 +7,9 @@ const UnProtectedRoute = ({ component: RouteComponent, ...rest }) => {
     return (
         <Route
             {...rest}
-            render={routeProps =>
+            render={props =>
                 !currentUser ? (
-                    <RouteComponent {...routeProps} />
+                    <RouteComponent {...props} />
                 ) : (
                     <Redirect to={"/profile"} />
                 )
