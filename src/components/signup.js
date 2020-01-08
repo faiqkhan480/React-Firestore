@@ -115,7 +115,7 @@ class Signup extends Component {
                 <Container>
                     <Row>
                         <Col>
-                            <NavLink className="navlink" to='/'>Already have an account</NavLink>
+                            <NavLink className="navlink" to='/login'>Already have an account</NavLink>
                         </Col>
                     </Row>
                 </Container>
