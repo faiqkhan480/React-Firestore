@@ -28,12 +28,14 @@ class Signup extends Component {
                         displayName: name
                     })
                         .then(() => {
-                            const userUid = fire.auth().currentUser.uid
+                            const userUid = fire.auth().currentUser.uid;
                             const userRef = db.collection("Users").doc(userUid);
                             userRef.set({
                                 name: name,
                                 email: email,
                                 phone: phone,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+
                             });
                             this.props.history.push('/profile');
                         })
