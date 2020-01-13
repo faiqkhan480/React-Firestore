@@ -5,6 +5,7 @@ import { AuthContext } from "./auth";
 
 const ProtectedRoute = ({Component: RouteComponent, ...rest}) => {
     const {currentUser} = useContext(AuthContext);
+    console.log(currentUser, 'cureenttuser')
     return(
         <Route {...rest} render={routeProps =>
             !!currentUser ? (

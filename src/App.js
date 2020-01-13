@@ -3,7 +3,7 @@ import fire from "./config/firebase";
 import { HashRouter, BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
-import AuthProvider from "./routes/auth";
+import { AuthProvider } from "./routes/auth";
 import ProtectedRoute from "./routes/protectedRoute";
 import UnProtectedRoute from "./routes/unprotectedRoute"
 import Home from './components/home';
