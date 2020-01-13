@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
-import {Container, Button, Form, FormGroup, Label, Input, Row, Col, Spinner} from 'reactstrap';
+import {Container, Button, Form, FormGroup, Row, Col, Spinner} from 'react-bootstrap';
 import {NavLink} from "react-router-dom";
 import fire from "../config/firebase";
 
@@ -15,13 +15,13 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                loading: false,
-            });
-        }, 2000);
-    }
+    // componentDidMount() {
+    //     setTimeout(() => {
+    //         this.setState({
+    //             loading: false,
+    //         });
+    //     }, 2000);
+    // }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value})
@@ -42,19 +42,21 @@ class Login extends Component {
     render() {
         const { email, password, loading } = this.state;
         return (
-            <div className="wrapper">
+            <div className="main">
                 {loading ?
-                    <Spinner style={{width: '3rem', height: '3rem'}} type="grow"/>
+                    <div>
+                        <Spinner animation="grow" style={{width:"50px", height:"50px"}}/>
+                    </div>
                     :
                     <>
-                        <Form className="mb-4 container" onSubmit={this.handleSubmit.bind(this)}>
+                        <Form className="mb-3 container" onSubmit={this.handleSubmit.bind(this)}>
                             <FormGroup className="container">
                                 <Row>
                                     <Col md="2" sm="2">
-                                        <Label for="Email">Email</Label>
+                                        <Form.Label>Email</Form.Label>
                                     </Col>
                                     <Col md="10" sm="10">
-                                        <Input className="fields" type="email" name="email" value={email}
+                                        <Form.Control className="fields" type="email" name="email" value={email}
                                                placeholder="something@idk.cool"
                                                onChange={this.handleChange.bind(this)}/>
                                     </Col>
@@ -63,10 +65,10 @@ class Login extends Component {
                             <FormGroup className="container">
                                 <Row>
                                     <Col md="2" sm="2">
-                                        <Label for="Password">Password</Label>
+                                        <Form.Label>Password</Form.Label>
                                     </Col>
                                     <Col md="10" sm="10">
-                                        <Input className="fields" type="password" name="password" value={password}
+                                        <Form.Control className="fields" type="password" name="password" value={password}
                                                placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
                                     </Col>
                                 </Row>

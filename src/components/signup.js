@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Button, Form, FormGroup, Label, Input, Container, Row, Col, Spinner} from 'reactstrap';
+import { Container, Button, Form, FormGroup, Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
-// import firebase, {Firestore as db} from "firebase";
+import firebase from "firebase";
 import fire, { db } from "../config/firebase";
 
 class Signup extends Component {
@@ -22,7 +22,6 @@ class Signup extends Component {
     handleSubmit(event)  {
         event.preventDefault();
         const { name, email, phone, password } = this.state;
-        console.log(this.state, 'state------')
         const promise = fire.auth().createUserWithEmailAndPassword(email, password);
         promise.then( async (res) => {
                     await res.user.updateProfile({
@@ -44,10 +43,6 @@ class Signup extends Component {
             });
     }
 
-    addUserInfo(uid) {
-         console.log(uid, 'addUserInfo=-=-=-')
-    }
-
     setValues() {
         this.setState({
             name: '',
@@ -62,45 +57,45 @@ class Signup extends Component {
     render() {
         const { name, email, phone, password, loading } = this.state
         return (
-            <div className="wrapper">
-                <Form className="mb-4 container" onSubmit={this.handleSubmit.bind(this)}>
+            <div className="main">
+                <Form className="mb-3 container" onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup className="container">
                         <Row>
                             <Col md="2" sm="2">
-                                <Label for="Name">Name</Label>
+                                <Form.Label>Name</Form.Label>
                             </Col>
                             <Col md="10" sm="10">
-                                <Input className="fields" type="text" name="name" value={name} placeholder="something" onChange={this.handleChange.bind(this)}/>
+                                <Form.Control className="fields" type="text" name="name" value={name} placeholder="something" onChange={this.handleChange.bind(this)}/>
                             </Col>
                         </Row>
                     </FormGroup>
                     <FormGroup className="container">
                         <Row>
                             <Col md="2" sm="2">
-                                <Label for="Email">Email</Label>
+                                <Form.Label>Email</Form.Label>
                             </Col>
                             <Col md="10" sm="10">
-                                <Input className="fields" type="email" name="email" value={email} placeholder="something@example.com" onChange={this.handleChange.bind(this)}/>
+                                <Form.Control className="fields" type="email" name="email" value={email} placeholder="something@example.com" onChange={this.handleChange.bind(this)}/>
                             </Col>
                         </Row>
                     </FormGroup>
                     <FormGroup className="container">
                         <Row>
                             <Col md="2" sm="2">
-                                <Label for="Phone">Phone</Label>
+                                <Form.Label>Phone</Form.Label>
                             </Col>
                             <Col md="10" sm="10">
-                                <Input className="fields" type="phone" name="phone" value={phone} placeholder="+92-6546545" onChange={this.handleChange.bind(this)}/>
+                                <Form.Control className="fields" type="phone" name="phone" value={phone} placeholder="+92-6546545" onChange={this.handleChange.bind(this)}/>
                             </Col>
                         </Row>
                     </FormGroup>
                     <FormGroup className="container">
                         <Row>
                             <Col md="2" sm="2">
-                                <Label for="Password">Password</Label>
+                                <Form.Label>Password</Form.Label>
                             </Col>
                             <Col md="10" sm="10">
-                                <Input className="fields" type="password" name="password" value={password} placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
+                                <Form.Control className="fields" type="password" name="password" value={password} placeholder="don't tell!" onChange={this.handleChange.bind(this)}/>
                             </Col>
                         </Row>
                     </FormGroup>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from "./config/firebase";
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 // import PageNavbar from './components/PageNavbar';
 import AuthProvider from "./routes/auth";
@@ -14,17 +14,10 @@ import Footer from "./components/footer";
 import Menu from "./components/nav";
 
 class App extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            uid: '',
-        }
-    }
     componentDidMount() {
         fire.auth().onAuthStateChanged(user => {
             if(user) {
                 console.log(user.uid, 'this user is signin')
-                this.setState({uid: user.uid})
             } else {
                 console.log("user is not signin")
                 this.setState({uid: null})
@@ -33,7 +26,6 @@ class App extends Component{
     }
 
     render() {
-        const { uid } = this.state
         return (
             <AuthProvider>
                 <HashRouter basename='/'>
@@ -41,11 +33,11 @@ class App extends Component{
                     <Switch>
                         <Route exact path='/' component={Home}/>
                         <UnProtectedRoute exact path='/login' component={Login}/>
-                        <Route path='/sign-up' component={Signup}/>
-                        <ProtectedRoute path='/profile' component={Profile}/>
+                        <Route exact path='/sign-up' component={Signup}/>
+                        <ProtectedRoute exact path='/profile' component={Profile}/>
                     </Switch>
                     <Footer />
-                </HashRouter>
+                </BrowserRouter>
             </AuthProvider>
         );
     }

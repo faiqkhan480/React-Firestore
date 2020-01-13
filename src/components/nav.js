@@ -1,8 +1,25 @@
 import React, { Component } from "react";
 import {Button, Container, Navbar} from "react-bootstrap";
+import fire from "../config/firebase";
 
 class Menu extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: "Signed in:"
+        }
+    }
+
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(user => {
+            if(user) {
+                this.setState({status: user.displayName})
+            }
+        })
+    }
+
     render() {
+        const { status } = this.state
         return(
             <Container className="menu">
                 <Navbar>
@@ -10,8 +27,8 @@ class Menu extends Component{
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            <Button className="outlined-button" href="#/login" variant="outline-info" >
-                                Signed in:
+                            <Button className="outlined-button" variant="outline-info" >
+                                {status}
                             </Button>
                         </Navbar.Text>
                     </Navbar.Collapse>

@@ -1,11 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Ma+Shan+Zheng&display=swap');
 
-#root {
-  height: 80vh;
-}
 /*navbar*/
 .menu {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .brand {
@@ -50,12 +47,15 @@
   box-shadow: 2px 8px 27px -13px rgba(0,0,0,0.75);
 }
 
-.wrapper {
+/*Loading Component*/
+
+.main {
+  /*background-color: #61dafb;*/
+  height: calc(100vh - 135px);
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  height: inherit;
+  flex-direction: column;
 }
 
 .jumbotron {
@@ -93,6 +93,45 @@
   border: none;
 }
 
+/*profile component*/
+.wrapper {
+  overflow-y: auto;
+  height: calc(100vh - 205px);
+  display: inline-block
+}
+.wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+.wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+.wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+/* Handle on hover */
+.wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.post-field {
+  border-radius: 25px;
+  /*text-align: center;*/
+  border-color: #679db7;
+}
+
+.post {
+  border-radius: 25px;
+  text-align: center;
+  background: -webkit-linear-gradient(to right, #05f3ff, #679db7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #05f3ff, #679db7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  width: 100%;
+}
+
+
 .navlink {
   color: #61dafb;
   float: right;
@@ -100,10 +139,6 @@
 }
 .navlink:hover {
   color: #61dafb;
-}
-
-.footer {
-  float: right;
 }
 
 .repolink {

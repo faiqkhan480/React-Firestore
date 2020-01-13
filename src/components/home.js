@@ -6,7 +6,7 @@ class Home extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            splashing: 'https://source.unsplash.com/1600x900/',
+            splashing: 'https://source.unsplash.com/1280x750/',
             loading: true,
         }
     }
@@ -23,11 +23,11 @@ class Home extends Component{
         const { splashing, loading } = this.state
         console.log(splashing, "in render")
         return(
-            <div className="root">
+            <div className="wrapper">
                 <Container>
                     { !loading ?
                             <Card text="white" className="text-center p-3 banner" border="light">
-                                <Card.Img variant="top" className="post" src={`${splashing}?todo`} />
+                                <Card.Img variant="top" src={`${splashing}?todo`} />
                                 <blockquote className="blockquote mb-0 card-body">
                                     <footer className="blockquote-footer">
                                         <small className="text-muted">
