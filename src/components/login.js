@@ -16,7 +16,7 @@ class Login extends Component {
     }
 
     // componentDidMount() {
-    //     setTimeout(() => {
+    //     setTimeout(async () => {
     //         this.setState({
     //             loading: false,
     //         });
@@ -43,7 +43,7 @@ class Login extends Component {
         const { email, password, loading } = this.state;
         return (
             <div className="main">
-                {loading ?
+                {!loading ?
                     <div>
                         <Spinner animation="grow" style={{width:"50px", height:"50px"}}/>
                     </div>
