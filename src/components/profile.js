@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from "firebase";
 import fire, { db } from "../config/firebase";
-import {Container, Row, Col, Button, Spinner, Navbar, Form, FormControl, ListGroup} from 'react-bootstrap'
+import {Container, Row, Col, Button, Spinner, Form, ListGroup} from 'react-bootstrap';
 
 class Profile extends React.Component{
     constructor(props){
@@ -11,42 +11,65 @@ class Profile extends React.Component{
             user: '',
             data: null,
             post: '',
+            curIndex: null
         }
     }
 
-    componentDidMount() {
+    getData() {
         fire.auth().onAuthStateChanged(user => {
             if(user) {
-                const arr  = [];
+                const data = [];
                 this.setState({uid: user.uid, user: user.displayName});
-                console.log(user.displayName, 'is sign in.....')
                 const userRef = db.collection("Users").doc(user.uid);
                 userRef.collection("posts")
-                    .onSnapshot((querySnap) => {
-                        querySnap.forEach((doc) => {
-                            arr.push(doc.data())
-                        })
-                        this.setState({data: arr});
+                    .onSnapshot((snapshot) => {
+                        snapshot.docChanges().forEach((change) => {
+                            const obj = {
+                                id: change.doc.id,
+                                name: change.doc.data().name,
+                                comment: change.doc.data().post,
+                            }
+                            if (change.type === "added") {
+                                data.push(obj);
+                                this.setState({post: '', data});
+                            }
+                        });
                     });
             }
         })
-        // const user = fire.auth().currentUser;
+    }
 
+    componentDidMount() {
+        this.getData()
     }
 
     handleLogout() {
         fire.auth().signOut();
     }
 
-    handleDelete() {
-        var user = firebase.auth().currentUser;
+    // handleUserDelete() {
+    //     var user = firebase.auth().currentUser;
+    //     console.log(user, "=-=-=-=-cureentuser=")
+    //     user.delete().then(function() {
+    //         console.log('User deleted');
+    //         this.props.history.push('/sign-up')
+    //     }).catch(function(error) {
+    //         console.log(error, 'An error happened.');
+    //     });
+    // }
 
-        user.delete().then(function() {
-            console.log('User deleted');
-            this.props.history.push('/sign-up')
-        }).catch(function(error) {
-            console.log(error, 'An error happened.');
-        });
+    handleDelete(id, index){
+        const { data } = this.state;
+        this.setState({currIndex: index});
+        const uid = fire.auth().currentUser.uid;
+        const userRef = db.collection("Users").doc(uid);
+        userRef.collection("posts").doc(id).delete()
+            .then(() => {
+                const result = data.filter(i => i.id !== id);
+                this.setState({data: result, currIndex: null})
+            }).catch((error) => {
+            console.error("Error removing document: ", error);
+            });
     }
 
     handleChange(e){
@@ -56,14 +79,15 @@ class Profile extends React.Component{
     handleSubmit(event){
         event.preventDefault();
         const { uid, user, post } = this.state;
-        const path = db.collection("Users").doc(uid)
+        const path = db.collection("Users").doc(uid);
+        const docc = path.collection("posts").doc().id;
         path.collection("posts").add({
             name: user,
             post: post,
             date: firebase.firestore.FieldValue.serverTimestamp(),
         })
             .then((res)=> {
-                this.setState({post: ''});
+                // this.setState({post: ''});
                 console.log('Document successfully written!');
             })
             .catch((error) => {
@@ -72,8 +96,7 @@ class Profile extends React.Component{
     }
 
     render() {
-        const { post, data } = this.state;
-        console.log(data)
+        const { post, data, currIndex } = this.state;
         return(
             <div className="mb-3">
                 {data ?
@@ -81,9 +104,21 @@ class Profile extends React.Component{
                         <Row >
                             <Col className="wrapper" lg="12">
                                 <ListGroup variant="flush">
-                                    {data.map((doc, index) => (
-                                        <ListGroup.Item key={index}>{doc.post}</ListGroup.Item>
-                                    ))}
+                                    {data.map((doc, index) => {
+                                        return (
+                                        <ListGroup.Item key={index} className="d-flex justify-content-between">
+                                            {doc.comment}
+                                            {currIndex == index ?
+                                                <div className="spinner-grow" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div>
+                                                :
+                                                <button onClick={this.handleDelete.bind(this, doc.id, index)} type="button" className="close" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            }
+                                        </ListGroup.Item>
+                                    )})}
                                 </ListGroup>
                             </Col>
                             <Col>
