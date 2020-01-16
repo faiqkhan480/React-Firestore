@@ -1,46 +1,17 @@
 import React, { Component } from 'react';
-import {Card, Container, Spinner} from "react-bootstrap";
-
+import { Container } from "react-bootstrap";
+import Svg from "./svg";
+import {NavLink} from "react-router-dom";
 
 class Home extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            splashing: 'https://source.unsplash.com/1280x750/',
-            loading: true,
-        }
-    }
-
-    componentDidMount() {
-        fetch(this.state.unsplashimg).then((response)=> {
-            this.setState({
-                loading: false,
-            })
-        })
-    }
-
     render() {
-        const { splashing, loading } = this.state
-        console.log(splashing, "in render")
         return(
-            <div className="wrapper">
-                <Container>
-                    { !loading ?
-                            <Card text="white" className="text-center p-3 banner" border="light">
-                                <Card.Img variant="top" src={`${splashing}?todo`} />
-                                <blockquote className="blockquote mb-0 card-body">
-                                    <footer className="blockquote-footer">
-                                        <small className="text-muted">
-                                            Make your<cite title="Source Title"> Todos</cite>
-                                        </small>
-                                    </footer>
-                                </blockquote>
-                            </Card>
-                        :
-                        <div className="post-loading">
-                            <Spinner animation="grow" />
-                        </div>
-                    }
+            <div className="banner d-flex justify-content-center align-items-center mb-5">
+                <Container className=" d-flex align-items-center flex-column">
+                    <NavLink to="/profile">
+                        <p className="display-3 display-sm-4 effect-underline">List Your Todos...</p>
+                    </NavLink>
+                    <Svg/>
                 </Container>
 
             </div>

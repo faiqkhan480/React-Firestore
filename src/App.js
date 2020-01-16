@@ -28,7 +28,7 @@ class App extends Component{
     render() {
         return (
             <AuthProvider>
-                <HashRouter basename='/'>
+                <HashRouter>
                     <Menu />
                     <Switch>
                         <Route exact path='/' component={Home}/>
@@ -37,7 +37,7 @@ class App extends Component{
                         <ProtectedRoute exact path='/profile' component={Profile}/>
                     </Switch>
                     <Footer />
-                </BrowserRouter>
+                </HashRouter>
             </AuthProvider>
         );
     }

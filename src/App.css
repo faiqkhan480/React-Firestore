@@ -16,7 +16,7 @@
   font-size: smaller;
   width: 130px;
   color: #679db7;
-  border-color: #679db7;
+  border: 1px solid #679db7;
   margin-left: 5px;
 }
 
@@ -43,9 +43,43 @@
 }
 
 .banner {
-  -webkit-box-shadow: 2px 8px 27px -13px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 8px 27px -13px rgba(0,0,0,0.75);
-  box-shadow: 2px 8px 27px -13px rgba(0,0,0,0.75);
+  overflow: hidden;
+  height: calc(100vh - 205px);
+  display: block
+}
+
+
+.effect-underline {
+  background: -webkit-linear-gradient(#05f3ff, #679db7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  font-size:10vw;
+}
+
+/*effect-underline*/
+.effect-underline:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(0,1);
+  transform: scale(0,1);
+}
+
+.effect-underline:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 
 /*Loading Component*/

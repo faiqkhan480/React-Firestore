@@ -3,6 +3,7 @@ import {Button, Container, Dropdown, Navbar} from "react-bootstrap";
 import fire from "../config/firebase";
 import {faUserCircle} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {NavLink} from "react-router-dom";
 
 class Menu extends Component{
     constructor(props) {
@@ -51,9 +52,9 @@ class Menu extends Component{
                             </Dropdown>
                             :
                             <Navbar.Text>
-                                <Button className="outlined-button" href="/login" variant="outline-info" >
+                                <NavLink className="outlined-button text-decoration-none pt-2 pb-2 pl-3 pr-3" to="/login" variant="outline-info" >
                                     Signed in:
-                                </Button>
+                                </NavLink>
                             </Navbar.Text>
                         }
                     </Navbar.Collapse>
